@@ -1,0 +1,5 @@
+- hosts: localhost
+  tasks:
+    - ansible.builtin.include_tasks: tasks/zsh.yml
+    - ansible.builtin.include_tasks: tasks/yabai_skhd.yml
+    - ansible.builtin.include_tasks: tasks/utils.yml
