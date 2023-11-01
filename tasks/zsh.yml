@@ -26,6 +26,7 @@
 
 - name: Add zsh to /etc/shells
   shell: echo "/opt/homebrew/bin/zsh" >> /etc/shells
+  tags: zsh
   become: true
   when:
     - ansible_facts['os_family'] == "Darwin"
@@ -33,6 +34,7 @@
 
 - name: Add zsh to /etc/shells
   shell: echo "/usr/local/bin/zsh" >> /etc/shells
+  tags: zsh
   become: true
   when:
     - ansible_facts['os_family'] == "Darwin"

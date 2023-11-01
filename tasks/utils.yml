@@ -11,6 +11,7 @@
     path: '/opt/homebrew/bin'
     name: '{{ utils }}'
     state: present
+  tags: utils
   when:
     - ansible_facts['os_family'] == "Darwin"
     - ansible_architecture == "arm64"
@@ -20,6 +21,7 @@
     path: '/usr/local/bin'
     name: '{{ utils }}'
     state: present
+  tags: utils
   when:
     - ansible_facts['os_family'] == "Darwin"
     - ansible_architecture == "x86_64"
@@ -28,5 +30,6 @@
   become: true
   apt:
     name: '{{ utils }}'
+  tags: utils
   when:
     - ansible_facts['os_family'] != "Darwin"
