@@ -1,0 +1,32 @@
+- name: Set utils
+  set_fact:
+    utils:
+      - bear
+      - ripgrep
+      - tmux
+      - fzf
+
+- name: Install utils (m1 mac)
+  community.general.homebrew:
+    path: '/opt/homebrew/bin'
+    name: '{{ utils }}'
+    state: present
+  when:
+    - ansible_facts['os_family'] == "Darwin"
+    - ansible_architecture == "arm64"
+
+- name: Install utils (intel mac)
+  community.general.homebrew:
+    path: '/usr/local/bin'
+    name: '{{ utils }}'
+    state: present
+  when:
+    - ansible_facts['os_family'] == "Darwin"
+    - ansible_architecture == "x86_64"
+
+- name: Install utils (linux)
+  become: true
+  apt:
+    name: '{{ utils }}'
+  when:
+    - ansible_facts['os_family'] != "Darwin"
